@@ -8,6 +8,7 @@ package sortingassignment;
 import java.util.ArrayList;
 import java.util.List;
 import sortingassignment.models.Tshirt;
+import sortingassignment.sortingservices.BubbleSort;
 import sortingassignment.sortingservices.QuickSort;
 
 /**
@@ -24,7 +25,9 @@ public class SortingAssignment {
         ArrayList<Tshirt> mytshirts = generateTShirts(10);
         showTShirts(mytshirts);
         QuickSort qs = new QuickSort();
-        qs.sort(mytshirts, 0, mytshirts.size()-1, 1, 2);
+        BubbleSort bs = new BubbleSort();
+//        qs.sort(mytshirts, 0, mytshirts.size()-1, 1, 2);
+        bs.sort(mytshirts, 1, 1);
         System.out.println("After sort by size");
         showTShirts(mytshirts);
         
