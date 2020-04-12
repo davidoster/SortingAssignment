@@ -14,7 +14,7 @@ import sortingassignment.models.Tshirt;
  */
 public class BubbleSort {
     
-    public ArrayList<Tshirt> sort(ArrayList<Tshirt> arr, int typeOfSort, int order) 
+    public void sort(ArrayList<Tshirt> arr, int typeOfSort, int order) 
     { 
         // typeofSort = 1, Size
         // typeofSort = 2, Color
@@ -89,6 +89,6 @@ public class BubbleSort {
                         }
                 break;
         }
-        return arr;
+//        return arr;
     } 
 }
