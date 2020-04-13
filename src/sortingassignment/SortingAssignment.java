@@ -28,31 +28,12 @@ public class SortingAssignment {
         ArrayList<Tshirt> mytshirts = new ArrayList<>(orig_mytshirts);
         ArrayList<Tshirt> mytshirts2 = new ArrayList<>(orig_mytshirts);
         ArrayList<Tshirt> mytshirts3 = new ArrayList<>(orig_mytshirts);
-        QuickSort qs = new QuickSort();
-        BubbleSort bs = new BubbleSort();
-        BucketSort bus = new BucketSort();
-        
-//        showTShirts(mytshirts);
+     
+        QuickSort qs = new QuickSort(mytshirts, 0, mytshirts.size()-1, 1, 1);
 
-        // Quick Sort
-        long start_qs = System.currentTimeMillis();
-        qs.sort(mytshirts, 0, mytshirts.size()-1, 1, 1);
-        long end_qs = System.currentTimeMillis();
-        System.out.println("Quick Sort for " + noOfShirts + " shirts took: " + ((end_qs - start_qs) / divisor));
-        
-        // Bubble Sort
-        long start_bs = System.currentTimeMillis();
-        bs.sort(mytshirts2, 1, 1);
-        long end_bs = System.currentTimeMillis();
-        System.out.println("Bubble Sort for " + noOfShirts + " shirts took: " + ((end_bs - start_bs) / divisor));
-
-        // Bucket Sort
-        long start_bus = System.currentTimeMillis();
-        mytshirts = bus.sort(mytshirts3, 1, 1);
-        long end_bus = System.currentTimeMillis();
-        System.out.println("Bucket Sort for " + noOfShirts + " shirts took: " + ((end_bus - start_bus) / divisor));
-//        showTShirts(mytshirts);
-        
+        BubbleSort bs = new BubbleSort(mytshirts2, 1, 1);
+//
+        BucketSort bus = new BucketSort(mytshirts3, 1, 1);
     }
     
     public static ArrayList<Tshirt> generateTShirts(int quantity) {

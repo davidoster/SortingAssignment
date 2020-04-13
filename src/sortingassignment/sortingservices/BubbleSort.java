@@ -12,7 +12,21 @@ import sortingassignment.models.Tshirt;
  *
  * @author mac
  */
-public class BubbleSort {
+public class BubbleSort implements Runnable {
+    private Thread bsThread;
+    private ArrayList<Tshirt> arr;
+    private int typeOfSort; 
+    private int order;
+    private int divisor = 1;
+    private String result;
+    
+    public BubbleSort(ArrayList<Tshirt> arr, int typeOfSort, int order) {
+       this.arr = arr;
+       this.typeOfSort = typeOfSort;
+       this.order = order;
+       bsThread = new Thread(this, "Bubble Sort thread");
+       bsThread.start();
+    }
     
     public void sort(ArrayList<Tshirt> arr, int typeOfSort, int order) 
     { 
@@ -91,4 +105,17 @@ public class BubbleSort {
         }
 //        return arr;
     } 
+
+    public String getResult() {
+        return(this.result);
+    }
+    
+    @Override
+    public void run() {
+        long start_bs = System.currentTimeMillis();
+        sort(arr, typeOfSort, order);
+        long end_bs = System.currentTimeMillis();
+        this.result = "Bubble Sort for " + arr.size() + " shirts took: " + ((end_bs - start_bs) / divisor);
+        System.out.println(this.result);
+    }
 }

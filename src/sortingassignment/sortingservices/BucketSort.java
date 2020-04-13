@@ -6,14 +6,28 @@
 package sortingassignment.sortingservices;
 
 import java.util.ArrayList;
-import java.util.List;
 import sortingassignment.models.Tshirt;
 
 /**
  *
  * @author mac
  */
-public class BucketSort {
+public class BucketSort implements Runnable {
+    private Thread busThread;
+    private ArrayList<Tshirt> array;
+    private int typeOfSort;
+    private int order;
+    private int divisor = 1;
+    private String result;
+    
+    public BucketSort(ArrayList<Tshirt> array, int typeOfSort, int order){
+        this.array = array;
+        this.typeOfSort = typeOfSort;
+        this.order = order;
+        busThread = new Thread(this, "Bucket Sort thread");
+        busThread.start();
+    }
+    
     public ArrayList<Tshirt> sort(ArrayList<Tshirt> array, int typeOfSort, int order)  
     {    
         // typeofSort = 1, Size
@@ -102,5 +116,15 @@ public class BucketSort {
         }
         
         return sortedTShirts;
+    }
+
+    @Override
+    public void run() {
+        long start_bus = System.currentTimeMillis();
+        ArrayList<Tshirt> mytshirts = sort(array, typeOfSort, order);
+        long end_bus = System.currentTimeMillis();
+        this.result = "Bucket Sort for " + mytshirts.size() + " shirts took: " + ((end_bus - start_bus) / divisor);
+        System.out.println(this.result);
+        
     }
 }

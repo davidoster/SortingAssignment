@@ -12,7 +12,29 @@ import sortingassignment.models.Tshirt;
  *
  * @author mac
  */
-public class QuickSort {
+public class QuickSort implements Runnable {
+    private Thread qsThread;
+    private ArrayList<Tshirt> arr;
+    private int low;
+    private int high;
+    private int typeOfSort;
+    private int order;
+    private int divisor = 1;
+    private String result;
+    
+    public QuickSort(ArrayList<Tshirt> arr, int low, int high, int typeOfSort, int order) {
+       this.arr = arr;
+       this.low = low;
+       this.high = high;
+       this.typeOfSort = typeOfSort;
+       this.order = order;
+       qsThread = new Thread(this, "Quick Sort thread");
+       qsThread.start();
+    }
+    
+    public String getResult() {
+        return(this.result);
+    }
         
     public void sort(ArrayList<Tshirt> arr, int low, int high, int typeOfSort, int order) 
     { 
@@ -121,4 +143,13 @@ public class QuickSort {
         }
         return i+1; 
     } 
+
+    @Override
+    public void run() {
+        long start_qs = System.currentTimeMillis();
+        sort(arr, low, high, typeOfSort, order);
+        long end_qs = System.currentTimeMillis();
+        this.result = "Quick Sort for " + arr.size() + " shirts took: " + ((end_qs - start_qs) / divisor);
+        System.out.println(this.result);
+    }
 }
