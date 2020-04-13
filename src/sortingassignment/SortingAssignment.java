@@ -22,17 +22,36 @@ public class SortingAssignment {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        ArrayList<Tshirt> mytshirts = generateTShirts(10);
-        showTShirts(mytshirts);
+        int noOfShirts = 100000;
+        int divisor = 1;
+        ArrayList<Tshirt> orig_mytshirts = generateTShirts(noOfShirts);
+        ArrayList<Tshirt> mytshirts = new ArrayList<>(orig_mytshirts);
+        ArrayList<Tshirt> mytshirts2 = new ArrayList<>(orig_mytshirts);
+        ArrayList<Tshirt> mytshirts3 = new ArrayList<>(orig_mytshirts);
         QuickSort qs = new QuickSort();
         BubbleSort bs = new BubbleSort();
         BucketSort bus = new BucketSort();
-//        qs.sort(mytshirts, 0, mytshirts.size()-1, 1, 2);
-//        bs.sort(mytshirts, 3, 2);
-        mytshirts = bus.sort(mytshirts, 1, 1);
-        System.out.println("After sort by size");
-        showTShirts(mytshirts);
+        
+//        showTShirts(mytshirts);
+
+        // Quick Sort
+        long start_qs = System.currentTimeMillis();
+        qs.sort(mytshirts, 0, mytshirts.size()-1, 1, 1);
+        long end_qs = System.currentTimeMillis();
+        System.out.println("Quick Sort for " + noOfShirts + " shirts took: " + ((end_qs - start_qs) / divisor));
+        
+        // Bubble Sort
+        long start_bs = System.currentTimeMillis();
+        bs.sort(mytshirts2, 1, 1);
+        long end_bs = System.currentTimeMillis();
+        System.out.println("Bubble Sort for " + noOfShirts + " shirts took: " + ((end_bs - start_bs) / divisor));
+
+        // Bucket Sort
+        long start_bus = System.currentTimeMillis();
+        mytshirts = bus.sort(mytshirts3, 1, 1);
+        long end_bus = System.currentTimeMillis();
+        System.out.println("Bucket Sort for " + noOfShirts + " shirts took: " + ((end_bus - start_bus) / divisor));
+//        showTShirts(mytshirts);
         
     }
     
